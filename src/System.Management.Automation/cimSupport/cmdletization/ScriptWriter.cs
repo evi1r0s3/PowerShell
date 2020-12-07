@@ -234,7 +234,7 @@ function __cmdletization_BindCommonParameters
             return verb + "-" + noun;
         }
 
-        private string GetCmdletAttributes(CommonCmdletMetadata cmdletMetadata)
+        private static string GetCmdletAttributes(CommonCmdletMetadata cmdletMetadata)
         {
             // Generate the script for the Alias and Obsolete Attribute if any is declared in CDXML
             StringBuilder attributes = new StringBuilder(150);
@@ -1086,7 +1086,7 @@ function __cmdletization_BindCommonParameters
                     prefix);
             }
 
-            if (MethodParameterBindings.In == (methodParameterBindings & MethodParameterBindings.In))
+            if ((methodParameterBindings & MethodParameterBindings.In) == MethodParameterBindings.In)
             {
                 Dbg.Assert(cmdletParameterName != null, "Called should verify cmdletParameterName!=null for 'in' parameters");
 
@@ -1114,7 +1114,7 @@ function __cmdletization_BindCommonParameters
                 CodeGeneration.EscapeSingleQuotedStringContent(cmdletParameterTypeName),
                 CodeGeneration.EscapeSingleQuotedStringContent(methodParameterBindings.ToString()));
 
-            if (MethodParameterBindings.In == (methodParameterBindings & MethodParameterBindings.In))
+            if ((methodParameterBindings & MethodParameterBindings.In) == MethodParameterBindings.In)
             {
                 output.WriteLine("{0}}}", prefix);
             }
@@ -1222,7 +1222,7 @@ function __cmdletization_BindCommonParameters
                             methodParameter.ParameterName,
                             methodParameterBindings);
 
-                        if (MethodParameterBindings.Out == (methodParameterBindings & MethodParameterBindings.Out))
+                        if ((methodParameterBindings & MethodParameterBindings.Out) == MethodParameterBindings.Out)
                         {
                             typesOfOutParameters.Add(dotNetTypeOfParameter);
                             etsTypesOfOutParameters.Add(methodParameter.Type.ETSType);
@@ -1246,7 +1246,7 @@ function __cmdletization_BindCommonParameters
                             CodeGeneration.EscapeSingleQuotedStringContent(method.ReturnValue.Type.ETSType));
                     }
 
-                    if (MethodParameterBindings.Out == (methodParameterBindings & MethodParameterBindings.Out))
+                    if ((methodParameterBindings & MethodParameterBindings.Out) == MethodParameterBindings.Out)
                     {
                         typesOfOutParameters.Add(dotNetTypeOfParameter);
                         etsTypesOfOutParameters.Add(method.ReturnValue.Type.ETSType);
@@ -1363,7 +1363,7 @@ function __cmdletization_BindCommonParameters
                         methodParameter.ParameterName,
                         methodParameterBindings);
 
-                    if (MethodParameterBindings.Out == (methodParameterBindings & MethodParameterBindings.Out))
+                    if ((methodParameterBindings & MethodParameterBindings.Out) == MethodParameterBindings.Out)
                     {
                         typesOfOutParameters.Add(dotNetTypeOfParameter);
                         etsTypesOfOutParameters.Add(methodParameter.Type.ETSType);
@@ -1387,7 +1387,7 @@ function __cmdletization_BindCommonParameters
                         CodeGeneration.EscapeSingleQuotedStringContent(method.ReturnValue.Type.ETSType));
                 }
 
-                if (MethodParameterBindings.Out == (methodParameterBindings & MethodParameterBindings.Out))
+                if ((methodParameterBindings & MethodParameterBindings.Out) == MethodParameterBindings.Out)
                 {
                     typesOfOutParameters.Add(dotNetTypeOfParameter);
                     etsTypesOfOutParameters.Add(method.ReturnValue.Type.ETSType);
@@ -1444,7 +1444,7 @@ function __cmdletization_BindCommonParameters
             }
         }
 
-        private void GenerateIfBoundParameter(
+        private static void GenerateIfBoundParameter(
             IEnumerable<string> commonParameterSets,
             IEnumerable<string> methodParameterSets,
             ParameterMetadata cmdletParameterMetadata,
@@ -1861,7 +1861,7 @@ Microsoft.PowerShell.Core\Export-ModuleMember -Function '{1}' -Alias '*'
         {
             StringBuilder output = new StringBuilder();
 
-            if (GenerationOptions.HelpXml == (_generationOptions & GenerationOptions.HelpXml))
+            if ((_generationOptions & GenerationOptions.HelpXml) == GenerationOptions.HelpXml)
             {
                 output.AppendFormat(
                     CultureInfo.InvariantCulture,
@@ -1874,7 +1874,7 @@ Microsoft.PowerShell.Core\Export-ModuleMember -Function '{1}' -Alias '*'
 
         private void WriteCmdlet(TextWriter output, StaticCmdletMetadata staticCmdlet)
         {
-            string attributeString = this.GetCmdletAttributes(staticCmdlet.CmdletMetadata);
+            string attributeString = GetCmdletAttributes(staticCmdlet.CmdletMetadata);
 
             Dictionary<string, ParameterMetadata> commonParameters = this.GetCommonParameters();
             List<string> commonParameterSets = GetCommonParameterSets(commonParameters);
@@ -1959,7 +1959,7 @@ Microsoft.PowerShell.Core\Export-ModuleMember -Function '{1}' -Alias '*'
 
         private void WriteCmdlet(TextWriter output, InstanceCmdletMetadata instanceCmdlet)
         {
-            string attributeString = this.GetCmdletAttributes(instanceCmdlet.CmdletMetadata);
+            string attributeString = GetCmdletAttributes(instanceCmdlet.CmdletMetadata);
 
             Dictionary<string, ParameterMetadata> commonParameters = this.GetCommonParameters();
             List<string> commonParameterSets = GetCommonParameterSets(commonParameters);
@@ -2066,7 +2066,7 @@ Microsoft.PowerShell.Core\Export-ModuleMember -Function '{1}' -Alias '*'
             CommonCmdletMetadata cmdletMetadata = this.GetGetCmdletMetadata();
             Dbg.Assert(cmdletMetadata != null, "xsd should ensure that cmdlet metadata element is always present");
             CommandMetadata commandMetadata = this.GetCommandMetadata(cmdletMetadata);
-            string attributeString = this.GetCmdletAttributes(cmdletMetadata);
+            string attributeString = GetCmdletAttributes(cmdletMetadata);
 
             GetCmdletParameters getCmdletParameters = this.GetGetCmdletParameters(null);
             if (!string.IsNullOrEmpty(getCmdletParameters.DefaultCmdletParameterSet))

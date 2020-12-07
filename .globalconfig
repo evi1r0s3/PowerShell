@@ -1,7 +1,8 @@
 is_global = true
 
 # CA1000: Do not declare static members on generic types
-dotnet_diagnostic.CA1000.severity = silent
+dotnet_diagnostic.CA1000.severity = warning
+dotnet_code_quality.ca1000.api_surface = all
 
 # CA1001: Types that own disposable fields should be disposable
 dotnet_diagnostic.CA1001.severity = silent
@@ -23,7 +24,8 @@ dotnet_diagnostic.CA1008.severity = none
 dotnet_diagnostic.CA1010.severity = silent
 
 # CA1012: Abstract types should not have public constructors
-dotnet_diagnostic.CA1012.severity = none
+dotnet_diagnostic.CA1012.severity = warning
+dotnet_code_quality.ca1012.api_surface = all
 
 # CA1014: Mark assemblies with CLSCompliant
 dotnet_diagnostic.CA1014.severity = none
@@ -128,7 +130,7 @@ dotnet_diagnostic.CA1063.severity = none
 dotnet_diagnostic.CA1064.severity = none
 
 # CA1065: Do not raise exceptions in unexpected locations
-dotnet_diagnostic.CA1065.severity = none
+dotnet_diagnostic.CA1065.severity = warning
 
 # CA1066: Implement IEquatable when overriding Object.Equals
 dotnet_diagnostic.CA1066.severity = none
@@ -266,7 +268,7 @@ dotnet_diagnostic.CA1814.severity = none
 dotnet_diagnostic.CA1815.severity = none
 
 # CA1816: Dispose methods should call SuppressFinalize
-dotnet_diagnostic.CA1816.severity = suggestion
+dotnet_diagnostic.CA1816.severity = warning
 
 # CA1819: Properties should not return arrays
 dotnet_diagnostic.CA1819.severity = none
@@ -389,7 +391,7 @@ dotnet_diagnostic.CA2207.severity = warning
 dotnet_diagnostic.CA2208.severity = suggestion
 
 # CA2211: Non-constant fields should not be visible
-dotnet_diagnostic.CA2211.severity = suggestion
+dotnet_diagnostic.CA2211.severity = warning
 
 # CA2213: Disposable fields should be disposed
 dotnet_diagnostic.CA2213.severity = none
@@ -401,7 +403,7 @@ dotnet_diagnostic.CA2214.severity = none
 dotnet_diagnostic.CA2215.severity = silent
 
 # CA2216: Disposable types should declare finalizer
-dotnet_diagnostic.CA2216.severity = none
+dotnet_diagnostic.CA2216.severity = warning
 
 # CA2217: Do not mark enums with FlagsAttribute
 dotnet_diagnostic.CA2217.severity = none
@@ -818,7 +820,7 @@ dotnet_diagnostic.IDE0029.severity = silent
 dotnet_diagnostic.IDE0030.severity = silent
 
 # IDE0031: UseNullPropagation
-dotnet_diagnostic.IDE0031.severity = silent
+dotnet_diagnostic.IDE0031.severity = warning
 
 # IDE0032: UseAutoProperty
 dotnet_diagnostic.IDE0032.severity = silent
@@ -947,10 +949,10 @@ dotnet_diagnostic.IDE0072.severity = silent
 dotnet_diagnostic.IDE0073.severity = suggestion
 
 # IDE0074: UseCoalesceCompoundAssignment
-dotnet_diagnostic.IDE0074.severity = silent
+dotnet_diagnostic.IDE0074.severity = warning
 
 # IDE0075: SimplifyConditionalExpression
-dotnet_diagnostic.IDE0075.severity = silent
+dotnet_diagnostic.IDE0075.severity = warning
 
 # IDE0076: InvalidSuppressMessageAttribute
 dotnet_diagnostic.IDE0076.severity = silent
@@ -1010,13 +1012,13 @@ dotnet_diagnostic.SA0001.severity = none
 dotnet_diagnostic.SA0002.severity = none
 
 # SA1000: Keywords should be spaced correctly
-dotnet_diagnostic.SA1000.severity = none
+dotnet_diagnostic.SA1000.severity = warning
 
 # SA1001: Commas should be spaced correctly
 dotnet_diagnostic.SA1001.severity = none
 
 # SA1002: Semicolons should be spaced correctly
-dotnet_diagnostic.SA1002.severity = none
+dotnet_diagnostic.SA1002.severity = warning
 
 # SA1003: Symbols should be spaced correctly
 dotnet_diagnostic.SA1003.severity = none
@@ -1028,7 +1030,7 @@ dotnet_diagnostic.SA1004.severity = none
 dotnet_diagnostic.SA1005.severity = none
 
 # SA1006: Preprocessor keywords should not be preceded by space
-dotnet_diagnostic.SA1006.severity = none
+dotnet_diagnostic.SA1006.severity = warning
 
 # SA1007: Operator keyword should be followed by space
 dotnet_diagnostic.SA1007.severity = warning
@@ -1115,7 +1117,7 @@ dotnet_diagnostic.SA1104.severity = none
 dotnet_diagnostic.SA1105.severity = none
 
 # SA1106: Code should not contain empty statements
-dotnet_diagnostic.SA1106.severity = none
+dotnet_diagnostic.SA1106.severity = warning
 
 # SA1107: Code should not contain multiple statements on one line
 dotnet_diagnostic.SA1107.severity = none
@@ -1160,7 +1162,7 @@ dotnet_diagnostic.SA1120.severity = none
 dotnet_diagnostic.SA1121.severity = none
 
 # SA1122: Use string.Empty for empty strings
-dotnet_diagnostic.SA1122.severity = none
+dotnet_diagnostic.SA1122.severity = warning
 
 # SA1123: Do not place regions within elements
 dotnet_diagnostic.SA1123.severity = none
@@ -1184,7 +1186,7 @@ dotnet_diagnostic.SA1129.severity = none
 dotnet_diagnostic.SA1130.severity = none
 
 # SA1131: Use readable conditions
-dotnet_diagnostic.SA1131.severity = none
+dotnet_diagnostic.SA1131.severity = warning
 
 # SA1132: Do not combine fields
 dotnet_diagnostic.SA1132.severity = none
@@ -1250,7 +1252,7 @@ dotnet_diagnostic.SA1210.severity = none
 dotnet_diagnostic.SA1211.severity = none
 
 # SA1212: Property accessors should follow order
-dotnet_diagnostic.SA1212.severity = none
+dotnet_diagnostic.SA1212.severity = warning
 
 # SA1213: Event accessors should follow order
 dotnet_diagnostic.SA1213.severity = none
@@ -1373,7 +1375,7 @@ dotnet_diagnostic.SA1505.severity = none
 dotnet_diagnostic.SA1506.severity = none
 
 # SA1507: Code should not contain multiple blank lines in a row
-dotnet_diagnostic.SA1507.severity = none
+dotnet_diagnostic.SA1507.severity = warning
 
 # SA1508: Closing braces should not be preceded by blank line
 dotnet_diagnostic.SA1508.severity = none
@@ -1400,10 +1402,10 @@ dotnet_diagnostic.SA1514.severity = none
 dotnet_diagnostic.SA1515.severity = none
 
 # SA1516: Elements should be separated by blank line
-dotnet_diagnostic.SA1516.severity = none
+dotnet_diagnostic.SA1516.severity = warning
 
 # SA1517: Code should not contain blank lines at start of file
-dotnet_diagnostic.SA1517.severity = none
+dotnet_diagnostic.SA1517.severity = warning
 
 # SA1518: Use line endings correctly at end of file
 dotnet_diagnostic.SA1518.severity = warning
@@ -1529,7 +1531,7 @@ dotnet_diagnostic.SA1641.severity = none
 dotnet_diagnostic.SA1642.severity = none
 
 # SA1643: Destructor summary documentation should begin with standard text
-dotnet_diagnostic.SA1643.severity = none
+dotnet_diagnostic.SA1643.severity = warning
 
 # SA1648: inheritdoc should be used with inheriting class
 dotnet_diagnostic.SA1648.severity = none

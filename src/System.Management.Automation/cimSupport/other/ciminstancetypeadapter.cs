@@ -135,7 +135,7 @@ namespace Microsoft.PowerShell.Cim
             return null;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override PSAdaptedProperty GetFirstPropertyOrDefault(object baseObject, MemberNamePredicate predicate)
         {
             if (predicate == null)
@@ -242,7 +242,7 @@ namespace Microsoft.PowerShell.Cim
             throw new ArgumentNullException(nameof(adaptedProperty));
         }
 
-        private void AddTypeNameHierarchy(IList<string> typeNamesWithNamespace, IList<string> typeNamesWithoutNamespace, string namespaceName, string className)
+        private static void AddTypeNameHierarchy(IList<string> typeNamesWithNamespace, IList<string> typeNamesWithoutNamespace, string namespaceName, string className)
         {
             if (!string.IsNullOrEmpty(namespaceName))
             {
@@ -258,7 +258,7 @@ namespace Microsoft.PowerShell.Cim
                                      className));
         }
 
-        private List<CimClass> GetInheritanceChain(CimInstance cimInstance)
+        private static List<CimClass> GetInheritanceChain(CimInstance cimInstance)
         {
             List<CimClass> inheritanceChain = new List<CimClass>();
             CimClass cimClass = cimInstance.CimClass;
@@ -366,7 +366,7 @@ namespace Microsoft.PowerShell.Cim
                 return false;
             }
 
-            bool isReadOnly = (CimFlags.ReadOnly == (cimProperty.Flags & CimFlags.ReadOnly));
+            bool isReadOnly = ((cimProperty.Flags & CimFlags.ReadOnly) == CimFlags.ReadOnly);
             bool isSettable = !isReadOnly;
             return isSettable;
         }

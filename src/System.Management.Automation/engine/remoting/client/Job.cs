@@ -2016,7 +2016,7 @@ namespace System.Management.Automation
             SubmitAndWaitForConnect(connectJobOperations);
         }
 
-        private void SubmitAndWaitForConnect(List<IThrottleOperation> connectJobOperations)
+        private static void SubmitAndWaitForConnect(List<IThrottleOperation> connectJobOperations)
         {
             using (ThrottleManager connectThrottleManager = new ThrottleManager())
             {
@@ -2968,7 +2968,7 @@ namespace System.Management.Automation
             get
             {
                 RemoteRunspace remoteRS = Runspace as RemoteRunspace;
-                return (remoteRS != null) ? remoteRS.CanDisconnect : false;
+                return remoteRS != null && remoteRS.CanDisconnect;
             }
         }
 
@@ -4122,7 +4122,7 @@ namespace System.Management.Automation
             return null;
         }
 
-        private void RestoreRemoteOutput(Pipeline runningCmd)
+        private static void RestoreRemoteOutput(Pipeline runningCmd)
         {
             if (runningCmd != null)
             {

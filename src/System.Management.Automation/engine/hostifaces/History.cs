@@ -416,7 +416,7 @@ namespace Microsoft.PowerShell.Commands
                     }
                     else
                     {
-                        index = _countEntriesAdded;//SmallestIDinBuffer
+                        index = _countEntriesAdded; //SmallestIDinBuffer
 
                         for (long i = count - 1; i >= 0;)
                         {
@@ -755,11 +755,11 @@ namespace Microsoft.PowerShell.Commands
         /// Get the current history size.
         /// </summary>
         /// <returns></returns>
-        private int GetHistorySize()
+        private static int GetHistorySize()
         {
             int historySize = 0;
             var executionContext = LocalPipeline.GetExecutionContextFromTLS();
-            object obj = (executionContext != null) ? executionContext.GetVariableValue(SpecialVariables.HistorySizeVarPath) : null;
+            object obj = executionContext?.GetVariableValue(SpecialVariables.HistorySizeVarPath);
             if (obj != null)
             {
                 try
@@ -1315,7 +1315,7 @@ namespace Microsoft.PowerShell.Commands
         /// in the pipeline. If there are more than one element in pipeline
         /// (ex A | Invoke-History 2 | B) then we cannot do this replacement.
         /// </summary>
-        private void ReplaceHistoryString(HistoryInfo entry, LocalRunspace localRunspace)
+        private static void ReplaceHistoryString(HistoryInfo entry, LocalRunspace localRunspace)
         {
             var pipeline = (LocalPipeline)localRunspace.GetCurrentlyRunningPipeline();
             if (pipeline.AddToHistory)
@@ -1816,7 +1816,7 @@ namespace Microsoft.PowerShell.Commands
                 // confirmation message if all the clearhistory cmdlet is used without any parameters
                 if (!_countParameterSpecified)
                 {
-                    string message = StringUtil.Format(HistoryStrings.ClearHistoryWarning, "Warning");// "The command would clear all the entry(s) from the session history,Are you sure you want to continue ?";
+                    string message = StringUtil.Format(HistoryStrings.ClearHistoryWarning, "Warning"); // "The command would clear all the entry(s) from the session history,Are you sure you want to continue ?";
                     if (!ShouldProcess(message))
                     {
                         return;
@@ -1897,10 +1897,10 @@ namespace Microsoft.PowerShell.Commands
 
         /// <summary>
         /// Clears the session history based on the input parameter
-        /// <param name="id" >Id of the entry to be cleared.</param>
-        /// <param name="count" >Count of entries to be cleared.</param>
-        /// <param name="cmdline" >Cmdline string to be cleared.</param>
-        /// <param name="newest" >Order of the entries.</param>
+        /// <param name="id">Id of the entry to be cleared.</param>
+        /// <param name="count">Count of entries to be cleared.</param>
+        /// <param name="cmdline">Cmdline string to be cleared.</param>
+        /// <param name="newest">Order of the entries.</param>
         /// <returns>Nothing.</returns>
         /// </summary>
         private void ClearHistoryEntries(long id, int count, string cmdline, SwitchParameter newest)

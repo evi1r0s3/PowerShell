@@ -30,7 +30,7 @@ namespace Microsoft.PowerShell.Commands
         }
 
         /// <summary>
-        /// ObjectCommandPropertyValue constructor.
+        /// Initializes a new instance of the <see cref="ObjectCommandPropertyValue"/> class.
         /// </summary>
         /// <param name="propVal">Property Value.</param>
         /// <param name="isCaseSensitive">Indicates if the Property value comparison has to be case sensitive or not.</param>
@@ -65,8 +65,8 @@ namespace Microsoft.PowerShell.Commands
             }
         }
 
-        internal static readonly ObjectCommandPropertyValue NonExistingProperty = new ObjectCommandPropertyValue();
-        internal static readonly ObjectCommandPropertyValue ExistingNullProperty = new ObjectCommandPropertyValue(null);
+        internal static readonly ObjectCommandPropertyValue NonExistingProperty = new();
+        internal static readonly ObjectCommandPropertyValue ExistingNullProperty = new(null);
         private readonly bool _caseSensitive;
         internal CultureInfo cultureInfo = null;
 
@@ -139,6 +139,7 @@ namespace Microsoft.PowerShell.Commands
     internal class ObjectCommandComparer : IComparer
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="ObjectCommandComparer"/> class.
         /// Constructor that doesn't set any private field.
         /// Necessary because compareTo can compare two objects by calling
         /// ((ICompare)obj1).CompareTo(obj2) without using a key.

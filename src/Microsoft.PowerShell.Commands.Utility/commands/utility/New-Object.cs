@@ -34,7 +34,7 @@ namespace Microsoft.PowerShell.Commands
         /// <summary> the number</summary>
         [Parameter(ParameterSetName = netSetName, Mandatory = true, Position = 0)]
         [ValidateTrustedData]
-        public string TypeName { get; set; } = null;
+        public string TypeName { get; set; }
 
 #if !UNIX
         private Guid _comObjectClsId = Guid.Empty;
@@ -43,7 +43,7 @@ namespace Microsoft.PowerShell.Commands
         /// </summary>
         [Parameter(ParameterSetName = "Com", Mandatory = true, Position = 0)]
         [ValidateTrustedData]
-        public string ComObject { get; set; } = null;
+        public string ComObject { get; set; }
 #endif
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Microsoft.PowerShell.Commands
         [Parameter(ParameterSetName = netSetName, Mandatory = false, Position = 1)]
         [ValidateTrustedData]
         [Alias("Args")]
-        public object[] ArgumentList { get; set; } = null;
+        public object[] ArgumentList { get; set; }
 
         /// <summary>
         /// True if we should have an error when Com objects will use an interop assembly.
@@ -106,7 +106,7 @@ namespace Microsoft.PowerShell.Commands
 
         private void CreateMemberSetValueError(SetValueException e)
         {
-            Exception ex = new Exception(StringUtil.Format(NewObjectStrings.InvalidValue, e));
+            Exception ex = new(StringUtil.Format(NewObjectStrings.InvalidValue, e));
             ThrowTerminatingError(
                 new ErrorRecord(ex, "SetValueException", ErrorCategory.InvalidData, null));
         }
@@ -463,7 +463,7 @@ namespace Microsoft.PowerShell.Commands
                 {
                     createInfo = new ComCreateInfo();
 
-                    Thread thread = new Thread(new ParameterizedThreadStart(STAComCreateThreadProc));
+                    Thread thread = new(new ParameterizedThreadStart(STAComCreateThreadProc));
                     thread.SetApartmentState(ApartmentState.STA);
                     thread.Start(createInfo);
 

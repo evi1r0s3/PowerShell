@@ -84,7 +84,7 @@ namespace System.Diagnostics.Eventing
         [SecurityCritical]
         internal static string GetMessage(int errorCode)
         {
-            StringBuilder sb = new StringBuilder(512);
+            StringBuilder sb = new(512);
             int result = UnsafeNativeMethods.FormatMessage(FORMAT_MESSAGE_IGNORE_INSERTS |
                 FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ARGUMENT_ARRAY,
                 UnsafeNativeMethods.s_NULL, errorCode, 0, sb, sb.Capacity, UnsafeNativeMethods.s_NULL);
@@ -177,6 +177,7 @@ namespace System.Diagnostics.Eventing
                 [In] long keywords,
                 [In] char* message
                 );
+
         // ActivityId Control APIs
         [DllImport(EventProviderDllName, ExactSpelling = true, EntryPoint = "EventActivityIdControl", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
         [SecurityCritical]
@@ -865,7 +866,7 @@ namespace System.Diagnostics.Eventing
 
             [FieldOffset(12)]
             public UInt32 Type;
-        };
+        }
 
         [DllImport(WEVTAPI, CharSet = CharSet.Unicode, SetLastError = true)]
         [SecurityCritical]
