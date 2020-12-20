@@ -42,7 +42,8 @@ jobs:
     displayName: 'Skip Alpine or fxdependent for PS v6.0.*'
 
   - template: insert-nuget-config-azfeed.yml
-
+    parameters:
+      repoRoot: $(REPOROOT)
 
   - powershell: |
       import-module "$env:REPOROOT/build.psm1"
@@ -51,7 +52,9 @@ jobs:
     condition: and(succeeded(), ne(variables['SkipBuild'], 'true'))
 
   - powershell: |
+      $env:AzDevOpsFeedPAT2 = '$(AzDevOpsFeedPAT2)'
       & "$env:REPOROOT/tools/releaseBuild/vstsbuild.ps1" -ReleaseTag $(ReleaseTagVar) -Name '$(build)'
+      $env:AzDevOpsFeedPAT2 = $null
 
     displayName: 'Build and package'
     condition: and(succeeded(), ne(variables['SkipBuild'], 'true'))
@@ -151,7 +154,7 @@ jobs:
   - task: AzureFileCopy@4
     displayName: 'Upload to Azure - RPM - Signed'
     inputs:
-      SourcePath: '$(Build.StagingDirectory)\signedPackages\*'
+      SourcePath: '$(Build.StagingDirectory)\signedPackages\release\*'
       azureSubscription: '$(AzureFileCopySubscription)'
       Destination: AzureBlob
       storage: '$(StorageAccount)'
@@ -165,7 +168,7 @@ jobs:
 
   - template: upload-final-results.yml
     parameters:
-      artifactPath: '$(Build.StagingDirectory)\signedPackages'
+      artifactPath: '$(Build.StagingDirectory)\signedPackages\release'
       condition: and(and(succeeded(), eq(variables['SHOULD_SIGN'], 'true')),eq(variables['buildName'], 'RPM'))
 
   - task: ms.vss-governance-buildtask.governance-build-task-component-detection.ComponentGovernanceComponentDetection@0
