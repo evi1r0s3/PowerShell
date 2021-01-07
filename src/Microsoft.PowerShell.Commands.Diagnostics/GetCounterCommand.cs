@@ -16,9 +16,9 @@ using Microsoft.PowerShell.Commands.GetCounter;
 
 namespace Microsoft.PowerShell.Commands
 {
-    ///
+    /// <summary>
     /// Class that implements the Get-Counter cmdlet.
-    ///
+    /// </summary>
     [Cmdlet(VerbsCommon.Get, "Counter", DefaultParameterSetName = "GetCounterSet", HelpUri = "https://go.microsoft.com/fwlink/?LinkID=2109647")]
     public sealed class GetCounterCommand : PSCmdlet
     {
@@ -164,11 +164,11 @@ namespace Microsoft.PowerShell.Commands
                        FrenchCultureId, new List<Tuple<char, char>>()
                                             {
                                                 // 'APOSTROPHE' to 'RIGHT SINGLE QUOTATION MARK'
-                                                new Tuple<char, char>((char) 0x0027, (char) 0x2019),
+                                                new Tuple<char, char>((char)0x0027, (char)0x2019),
                                                 // 'MODIFIER LETTER APOSTROPHE' to 'RIGHT SINGLE QUOTATION MARK'
-                                                new Tuple<char, char>((char) 0x02BC, (char) 0x2019),
+                                                new Tuple<char, char>((char)0x02BC, (char)0x2019),
                                                 // 'HEAVY SINGLE COMMA QUOTATION MARK ORNAMENT' to 'RIGHT SINGLE QUOTATION MARK'
-                                                new Tuple<char, char>((char) 0x275C, (char) 0x2019),
+                                                new Tuple<char, char>((char)0x275C, (char)0x2019),
                                             }
                    }
                 };
